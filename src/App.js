@@ -12,6 +12,7 @@ class App extends Component {
     this.show = this.show.bind(this);
     this.handleReset = this.handleReset.bind(this);
     this.winner = this.winner.bind(this);
+    this.decisionHandler = this.decisionHandler.bind(this);
 
     this.state = {
       computer: "",
@@ -23,6 +24,7 @@ class App extends Component {
       ties: 0,
     }
   }
+
   computerPlay = () => {
     const computerSelection = (Math.floor(Math.random() * 3));
     if (computerSelection === 0) {
@@ -35,187 +37,63 @@ class App extends Component {
       return "scissors"
     }
   }
+  decisionHandler(choice) {
+    const compState = () => {
+      this.setState((prevState) => ({
+        computer,
+        human: choice,
+        computerCount: prevState.computerCount + 1,
+        totalCount: prevState.totalCount + 1
+      }))
+    }
+
+    const humanState = () => {
+      this.setState((prevState) => ({
+        computer,
+        human: choice,
+        humanCount: prevState.humanCount + 1,
+        totalCount: prevState.totalCount + 1
+      }))
+    }
+
+    const computer = this.computerPlay()
+    if (choice === computer) {
+      this.setState((prevState) => ({
+        computer,
+        human: choice,
+        totalCount: prevState.totalCount + 1,
+        ties: prevState.ties + 1
+      }))
+    }
+    if (choice === "scissors" && computer === "rock") {
+      compState();
+    }
+    if (choice === "scissors" && computer === "paper") {
+      humanState();
+    }
+    if (choice === "rock" && computer === "scissors") {
+      humanState();
+    }
+    if (choice === "rock" && computer === "paper") {
+      compState();
+    }
+    if (choice === "paper" && computer === "rock") {
+      humanState();
+    }
+    if (this.human === "paper" && computer === "scissors") {
+      compState();
+    }
+  }
   handleRock() {
-    const computer = this.computerPlay()
-    const human = "rock"
-    if (human === computer) {
-      this.setState({
-        computer,
-        human,
-        totalCount: this.state.totalCount + 1,
-        ties: this.state.ties + 1
-      })
-    }
-    if (human === "scissors" && computer === "rock") {
-      this.setState(
-        {
-          computer,
-          human,
-          computerCount: this.state.computerCount + 1,
-          totalCount: this.state.totalCount + 1
-        })
-    }
-    if (human === "scissors" && computer === "paper") {
-      this.setState({
-        computer,
-        human,
-        humanCount: this.state.humanCount + 1,
-        totalCount: this.state.totalCount + 1
-      })
-    }
-    if (human === "rock" && computer === "scissors") {
-      this.setState({
-        computer,
-        human, humanCount:
-          this.state.humanCount + 1,
-        totalCount: this.state.totalCount + 1
-      })
-    }
-    if (human === "rock" && computer === "paper") {
-      this.setState({
-        computer,
-        human,
-        computerCount: this.state.computerCount + 1,
-        totalCount: this.state.totalCount + 1
-      })
-    }
-    if (human === "paper" && computer === "rock") {
-      this.setState({
-        computer,
-        human, humanCount: this.state.humanCount + 1,
-        totalCount: this.state.totalCount + 1
-      })
-    }
-    if (human === "paper" && computer === "scissors") {
-      this.setState({
-        computer,
-        human,
-        computerCount: this.state.computerCount + 1,
-        totalCount: this.state.totalCount + 1
-      })
-    }
-
+    this.decisionHandler("rock")
   }
+
   handlePaper() {
-    const computer = this.computerPlay()
-    const human = "paper"
-    if (human === computer) {
-      this.setState({
-        computer,
-        human,
-        totalCount: this.state.totalCount + 1,
-        ties: this.state.ties + 1
-      })
-    }
-    if (human === "scissors" && computer === "rock") {
-      this.setState(
-        {
-          computer,
-          human,
-          computerCount: this.state.computerCount + 1,
-          totalCount: this.state.totalCount + 1
-        })
-    }
-    if (human === "scissors" && computer === "paper") {
-      this.setState({
-        computer,
-        human,
-        humanCount: this.state.humanCount + 1,
-        totalCount: this.state.totalCount + 1
-      })
-    }
-    if (human === "rock" && computer === "scissors") {
-      this.setState({
-        computer,
-        human, humanCount:
-          this.state.humanCount + 1,
-        totalCount: this.state.totalCount + 1
-      })
-    }
-    if (human === "rock" && computer === "paper") {
-      this.setState({
-        computer,
-        human,
-        computerCount: this.state.computerCount + 1,
-        totalCount: this.state.totalCount + 1
-      })
-    }
-    if (human === "paper" && computer === "rock") {
-      this.setState({
-        computer,
-        human, humanCount: this.state.humanCount + 1,
-        totalCount: this.state.totalCount + 1
-      })
-    }
-    if (human === "paper" && computer === "scissors") {
-      this.setState({
-        computer,
-        human,
-        computerCount: this.state.computerCount + 1,
-        totalCount: this.state.totalCount + 1
-      })
-    }
-
+    this.decisionHandler("paper")
   }
+
   handleScissors() {
-    const computer = this.computerPlay()
-    const human = "scissors"
-    if (human === computer) {
-      this.setState({
-        computer,
-        human,
-        totalCount: this.state.totalCount + 1,
-        ties: this.state.ties + 1
-      })
-    }
-    if (human === "scissors" && computer === "rock") {
-      this.setState(
-        {
-          computer,
-          human,
-          computerCount: this.state.computerCount + 1,
-          totalCount: this.state.totalCount + 1
-        })
-    }
-    if (human === "scissors" && computer === "paper") {
-      this.setState({
-        computer,
-        human,
-        humanCount: this.state.humanCount + 1,
-        totalCount: this.state.totalCount + 1
-      })
-    }
-    if (human === "rock" && computer === "scissors") {
-      this.setState({
-        computer,
-        human, humanCount:
-          this.state.humanCount + 1,
-        totalCount: this.state.totalCount + 1
-      })
-    }
-    if (human === "rock" && computer === "paper") {
-      this.setState({
-        computer,
-        human,
-        computerCount: this.state.computerCount + 1,
-        totalCount: this.state.totalCount + 1
-      })
-    }
-    if (human === "paper" && computer === "rock") {
-      this.setState({
-        computer,
-        human, humanCount: this.state.humanCount + 1,
-        totalCount: this.state.totalCount + 1
-      })
-    }
-    if (human === "paper" && computer === "scissors") {
-      this.setState({
-        computer,
-        human,
-        computerCount: this.state.computerCount + 1,
-        totalCount: this.state.totalCount + 1
-      })
-    }
+    this.decisionHandler("scissors")
   }
 
   game() {
@@ -247,7 +125,7 @@ class App extends Component {
   }
 
   handleReset() {
-    this.setState({
+    this.setState((prevState) => ({
       computer: "",
       human: "",
       status: "",
@@ -255,31 +133,32 @@ class App extends Component {
       humanCount: 0,
       totalCount: 0,
       ties: 0,
-    })
+    }))
   }
 
   winner() {
     const total = this.state.totalCount
     const computer = this.state.computerCount
     const player = this.state.humanCount
-    if (total % 5 === 0 && computer > player) {
+    const click = "Click reset to start all over"
+    if (total === 5 && computer > player) {
       return (
         <div>
-          The Computer Won this set.
+          You Wont his set {click}
         </div>
       )
     }
     if (total % 5 === 0 && player > computer) {
       return (
         <div>
-          You Won this set.
+          You Won this set {click} 
         </div>
       )
     }
     if (total % 5 === 0 && player === computer) {
       return (
         <div>
-          A Tie. No Winner
+          A Tie. No Winner. {click}
         </div>
       )
     }
@@ -287,51 +166,49 @@ class App extends Component {
   }
 
   show() {
-    const item = this.state.human
-    if (item) {
+    const humanChoice = this.state.human
+    if (humanChoice) {
       return (<div>You have chosen {this.state.human} while the computer has chosen {this.state.computer}</div>)
     }
   }
   render() {
     return (
-      <div>
+      <div className = "container">
         <div>
           <div>
             <h1>Rock Paper Scissors</h1>
-            <div>
-              <div>Your Count: {this.state.humanCount}</div>
-              <div>Computer Count: {this.state.computerCount}</div>
-              <div>Total number of ties: {this.state.ties}</div>
-              <div>Total Number of Games played: {this.state.totalCount}</div>
-              <div>{this.state.status}</div>
-              <div>{this.show()}</div>
-              <div>{this.game()}</div>
-              <div>{this.winner()}</div>
+            <div className="container1">
+              <div className="item1">Your Count: {this.state.humanCount}</div>
+              <div className="item1">Computer Count: {this.state.computerCount}</div>
+              <div className="item1">Total number of ties: {this.state.ties}</div>
+              <div className="item1">Total Number of Games played: {this.state.totalCount}</div>
+            </div>
+            <div className="container2">
+              <div className="item2">{this.state.status}</div>
+              <div className="item2 show">{this.show()}</div>
+              <div className="item2 game">{this.game()}</div>
+              <div className="item2 winner">{this.winner()}</div>
             </div>
           </div>
-          <nav>
-            <ul className="container">
-              <li className="item">
-                <button onClick={this.handleScissors}>SCISSORS</button>
-              </li>
-              <li className="item">
-                <button onClick={this.handlePaper}>PAPER</button>
-              </li>
-              <li className="item">
-                <button onClick={this.handleRock}>ROCK</button>
-              </li>
-              <li className="item">
-                <button onClick={this.handleReset}>RESET</button>
-              </li>
-            </ul>
-          </nav>
+          <div className="container3">
+            <div className="item3">
+              <button onClick={this.handleScissors}>SCISSORS</button>
+            </div>
+            <div className="item3">
+              <button onClick={this.handlePaper}>PAPER</button>
+            </div>
+            <div className="item3">
+              <button onClick={this.handleRock}>ROCK</button>
+            </div>
+            <div className="item3">
+              <button onClick={this.handleReset}>RESET</button>
+            </div>
+          </div>
         </div>
       </div>
     )
   }
 }
-
-
 
 export default App;
 
