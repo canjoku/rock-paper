@@ -9,9 +9,7 @@ class App extends Component {
     this.setWinner = this.setWinner.bind(this);
     this.resetHandler = this.resetHandler.bind(this);
     this.gameHandler = this.gameHandler.bind(this);
-    this.gameWinner = this.gameWinner.bind(this);
 
-    // state initialised
     this.state = {
       computerChoice: "",
       humanChoice: "",
@@ -19,7 +17,6 @@ class App extends Component {
     }
   }
 
-  // this method makes a random selection for the computer
 
   computerPlay() {
     const computerSelection = (Math.floor(Math.random() * 3));
@@ -40,75 +37,54 @@ class App extends Component {
     this.setState((prevState) => ({
       computerChoice,
       humanChoice,
-      totalGames: prevState.totalGames + 1,
+      totalGames: prevState.totalGames + 1
     }))
   }
-
-  gameWinner() {
-    const compCounts;
-    const humanCounts;
-
-    if (this.computerChoice === "paper" && this.humanChoice === "rock") {
-      compCounts ++;
-    }
-    if (this.computerChoice === "rock" && this.humanChoice === "scissors") {
-      compCounts ++
-    }
-    if (this.computerChoice === "scissors" && this.humanChoice === "paper") {
-      return "compWin"
-    }
-    if (this.computerChoice === "paper" && this.humanChoice === "scissors") {
-      return "humanWin"
-    }
-    if (this.computerChoice === "rock" && this.humanChoice === "paper") {
-      return "humanWin"
-    }
-    if (this.computerChoice === "scissors" && this.humanChoice === "rock") {
-      return "humanWin"
-    }
-  }
-
-
   setWinner() {
-    const total = this.state.totalGames
-    if ((total === 5) && (this.state.computerScore < this.state.humanScore)) {
-      return "You Won the set of five games. Click Reset to play another set"
+    const computer = this.state.computerChoice
+    const human = this.state.humanChoice
+    if (computer === human) {
+      return "Its a Tie"
     }
-    if ((total === 5) && (this.state.computerScore > this.state.humanScore)) {
-      return "The Computer won the set of five games. Click Reset to play another set"
+    if (computer === "paper" && human === "rock") {
+      return "Computer Wins"
     }
-    if ((total === 5) && (this.state.computerScore === this.state.humanScore)) {
-      return "There was a Tie in this set. Click Reset to Replay"
+    if (computer === "rock" && human === "scissors") {
+      return "computer Wins"
+    }
+    if (computer === "scissors" && human === "paper") {
+      return "Computer Wins"
+    }
+    if (computer === "paper" && human === "scissors") {
+      return "You Win"
+    }
+    if (computer === "rock" && human === "paper") {
+      return "You Win"
+    }
+    if (computer === "scissors" && human === "rock") {
+      return "You Win"
     }
   }
+
 
   resetHandler() {
     this.setState((prevState) => ({
       computerChoice: "",
       humanChoice: "",
       totalGames: 0,
-      computerScore: 0,
-      humanScore: 0,
-      ties: 0
     }))
   }
 
-
-
-  // this function returns jsx 
   render() {
     return (
       <div>
         <div>The computer's Choice: {this.state.computerChoice}</div><br />
         <div>Your Choice: {this.state.humanChoice}</div> <br />
         <div>Total Games Played: {this.state.totalGames}</div><br />
-        <div>Your total score is {this.state.humanScore}</div> <br />
-        <div>Computer total score is : {this.state.computerScore}</div><br />
-        <div>Total number of ties: {this.state.ties}</div> <br />
         <button onClick={this.gameHandler} id="scissors">SCISSORS</button>
         <button onClick={this.gameHandler} id="paper">PAPER</button>
         <button onClick={this.gameHandler} id="rock">ROCK</button>
-        <button onClick={this.resetHandler}>RESET </button> <br />
+        <button onClick={this.resetHandler} id="rock">RESET</button> <br />
         <div>{this.setWinner()}</div>
       </div>
     )
