@@ -65,23 +65,21 @@ class App extends Component {
   // This function will set State based on a tie game.
   tieState(computer, human) {
     this.setState((prevState) => ({
+      ...prevState,
       computerChoice: computer,
       humanChoice: human,
       totalGames: prevState.totalGames + 1,
-      computerCount: prevState.computerCount,
-      humanCount: prevState.humanCount,
       ties: prevState.ties + 1
     }))
   }
   // This function will set state based on a win by the computer.
   compWinState(computer, human) {
     this.setState((prevState) => ({
+      ...prevState,
       computerChoice: computer,
       humanChoice: human,
       totalGames: prevState.totalGames + 1,
-      computerCount: prevState.computerCount + 1,
-      humanCount: prevState.humanCount,
-      ties: prevState.ties
+      computerCount: prevState.computerCount + 1
     }))
   }
 
@@ -89,12 +87,11 @@ class App extends Component {
 
   humanWinState(computer, human) {
     this.setState((prevState) => ({
+      ...prevState,
       computerChoice: computer,
       humanChoice: human,
       totalGames: prevState.totalGames + 1,
-      computerCount: prevState.computerCount,
-      humanCount: prevState.humanCount + 1,
-      ties: prevState.ties
+      humanCount: prevState.humanCount + 1
     }))
   }
 
@@ -152,7 +149,6 @@ class App extends Component {
       ties: 0
     }))
   }
-
   render() {
     return (
       <div>
@@ -170,8 +166,6 @@ class App extends Component {
       </div>
     )
   }
-
-
 }
 
 export default App;
