@@ -137,9 +137,8 @@ class App extends Component {
   // This function determines what gets returned in the html
   showRoundWinner () {
 
-
     // Read from state and show who won the round
-    } else if (outcome === 'You Win') {
+    if (outcome === 'You Win') {
       return outcome
     } else if (totalGames < 5 && outcome === 'Computer Wins') {
       return outcome
